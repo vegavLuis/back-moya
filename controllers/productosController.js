@@ -1,5 +1,5 @@
 import { Productos } from "../models/index.js";
-import { validetObjectId } from "../utils/index.js";
+import { validetObjectId, handleNotFoundError } from "../utils/index.js";
 
 const createProducto = async (req, res) => {
   if (Object.values(req.body).includes("") || !req.files || !req.files.imagen) {
