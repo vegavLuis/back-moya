@@ -16,7 +16,7 @@ const comprasSchema = mongoose.Schema({
             type: Number,
             required: true,
             trim: true,
-            // min: [1, 'La cantidad debe ser al menos 1'],
+            min: [1, 'La cantidad debe ser al menos 1'],
         },
         precioUnitario:{
             type: Number,
