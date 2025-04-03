@@ -57,42 +57,34 @@ const getProductoById = async (req, res) => {
   if (!producto) {
     return handleNotFoundError("El producto no existe", res);
   }
-  res.json(producto);
+  const imagenBase64 = producto.imagen.toString('base64');
+  const productoConImagen = {
+    ...producto.toObject(),
+    imagenBase64: `data:image/jpeg;base64,${imagenBase64}`,
+  };
+  res.json(productoConImagen);
 };
-// const getAllProductos = async (req, res) => {
-//   try {
-//     const producto = await Productos.find();
-//     console.log(producto);
-//     res.json(producto);
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 const getAllProductos = async (req, res) => {
   try {
     const productos = await Productos.find();
-
-    // Convertir las imágenes a Base64 (en caso de que el buffer sea un Buffer de Node.js)
-    const productosConImagenesBase64 = productos.map((producto) => {
-      if (producto.imagen && producto.imagen.data) {
-        // Convertir el Buffer de la imagen a Base64
-        producto.imagen.data = producto.imagen.data.toString("base64");
-      }
-      return producto;
+    
+    const productosConImagenes = productos.map(producto => {
+      const imagenBase64 = producto.imagen.toString('base64');
+      return {
+        ...producto.toObject(),
+        imagenBase64: `data:image/jpeg;base64,${imagenBase64}`,
+      };
     });
 
-    res.json(productosConImagenesBase64);
+    res.json(productosConImagenes);
   } catch (error) {
-    console.error("Error al obtener los productos:", error);
-    res
-      .status(500)
-      .json({
-        msg: "Hubo un error al obtener los productos",
-        error: error.message,
-      });
+    console.error(error);
+    res.status(500).json({
+      msg: "Hubo un error al obtener los productos",
+      error: error.message,
+    });
   }
 };
-
 const updateProductoById = async (req, res) => {
   const { id } = req.params;
   if (validetObjectId(id, res)) return;

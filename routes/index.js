@@ -8,7 +8,7 @@ import express from "express";
 
 const router = express.Router();
 
-router.use("/productos",authMiddleware, productos);
+router.use("/productos", authMiddleware, productos);
 router.use("/auth", authMiddleware, auth);
 router.use("/usuarios", usuarios);
 router.use("/compras", authMiddleware, compras);
