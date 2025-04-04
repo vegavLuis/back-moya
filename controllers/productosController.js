@@ -49,8 +49,6 @@ const createProducto = async (req, res) => {
 };
 const getProductoById = async (req, res) => {
   const { id } = req.params;
-  // Validar un object id
-  if (validetObjectId(id, res)) return;
 
   // Validar que exista
   const producto = await Productos.findById(id);
@@ -87,7 +85,7 @@ const getAllProductos = async (req, res) => {
 };
 const updateProductoById = async (req, res) => {
   const { id } = req.params;
-  if (validetObjectId(id, res)) return;
+  // if (validetObjectId(id, res)) return;
 
   try {
     const producto = await Productos.findById(id);
