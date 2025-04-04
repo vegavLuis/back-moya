@@ -46,7 +46,7 @@ const createUsuario = async (req, res) => {
 const getUsuarioById = async (req, res) => {
   const { id } = req.params;
   // Validar un object id
-  if (validetObjectId(id, res)) return;
+  // if (validetObjectId(id, res)) return;
 
   // Validar que exista
   const usuario = await Usuarios.findById(id);
@@ -68,7 +68,7 @@ const getAllUsuarios = async (req, res) => {
 const updateUsuarioById = async (req, res) => {
   const { id } = req.params;
   // Validar un object id
-  if (validetObjectId(id, res)) return;
+  // if (validetObjectId(id, res)) return;
   // Validar que exista
   const usuario = await Usuarios.findById(id);
   if (!usuario) {
@@ -96,7 +96,7 @@ const updateUsuarioById = async (req, res) => {
 const deleteUsuarioById = async (req, res) => {
   const { id } = req.params;
   // Validar un object id
-  if (validetObjectId(id, res)) return;
+  // if (validetObjectId(id, res)) return;
 
   // Validar que exista
   const usuario = await Usuarios.findById(id);
